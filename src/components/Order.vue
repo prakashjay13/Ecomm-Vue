@@ -6,6 +6,8 @@
           <th>Name</th>
           <th>Quantity</th>
           <th>Price</th>
+          <th>Total Amount</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
@@ -13,6 +15,8 @@
           <td>{{ order.name }}</td>
           <td>{{ order.quantity }}</td>
           <td>{{ order.price }}</td>
+          <td>{{ order.quantity * order.price }}</td>
+          <td><h4>Processing</h4></td>
         </tr>
       </tbody>
     </table>
