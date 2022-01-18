@@ -295,7 +295,7 @@ export default {
       },
       submitted: false,
 
-      total: 0,
+      subtotal: localStorage.getItem("total"),
     };
   },
   validations: {
@@ -377,13 +377,6 @@ export default {
       console.log(cart);
       this.item.splice(cart, 1);
       localStorage.setItem("myCart", JSON.stringify(this.item));
-    },
-  },
-  computed: {
-    subtotal: function () {
-      return this.item.reduce((total, product) => {
-        return (total += product.quantity * product.price);
-      }, 0);
     },
   },
 };

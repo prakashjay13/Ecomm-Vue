@@ -25,7 +25,8 @@ export default new Vuex.Store({
                 window.localStorage.removeItem('uid'),
                 window.localStorage.removeItem('users'),
                 window.localStorage.removeItem('myCart'),
-                window.localStorage.removeItem('myWishlist')
+                window.localStorage.removeItem('myWishlist'),
+                window.localStorage.removeItem('total')
 
         },
         addToCart(state, id) { state.inCart.push(id) },

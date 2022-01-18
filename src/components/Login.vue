@@ -107,6 +107,7 @@ export default {
         .then((res) => {
           if (res.data.err == 0) {
             saveToken(res.data.token);
+            alert(res.data.msg);
             localStorage.setItem("uid", res.data.email);
             this.$router.push("/");
             store.dispatch({

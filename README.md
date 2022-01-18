@@ -1,23 +1,23 @@
 # eshop
 
-## Project setup
+## clone the project
+```
+git clone https://github.com/prakashjay13/Ecomm-Vue.git
+```
+
+### enter the project directory
+```
+cd Ecomm-Vue
+```
+
+### install dependency
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Start the local development server
 ```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ### Customize configuration

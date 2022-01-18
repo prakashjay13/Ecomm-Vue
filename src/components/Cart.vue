@@ -85,7 +85,7 @@
               <ul>
                 <li>
                   <h2>
-                    <b>Total: ₹ {{ subtotal }}</b>
+                    <b>Total: ₹ {{ check() }}</b>
                   </h2>
                 </li>
               </ul>
@@ -144,13 +144,15 @@ export default {
       this.item.splice(cart, 1);
       localStorage.setItem("myCart", JSON.stringify(this.item));
     },
-  },
 
-  computed: {
-    subtotal: function () {
-      return this.item.reduce((total, product) => {
-        return (total += product.quantity * product.price);
-      }, 0);
+    check() {
+      const items = JSON.parse(localStorage.getItem("myCart"));
+      var sum = 0;
+      items.forEach((product) => {
+        sum = sum + product.price * product.quantity;
+      });
+      localStorage.setItem("total", JSON.stringify(sum));
+      return sum;
     },
   },
 };
