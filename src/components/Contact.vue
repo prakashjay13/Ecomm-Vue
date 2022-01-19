@@ -88,7 +88,7 @@
                   v-model="user.message"
                   name="message"
                   id="message"
-                  rows="8"
+                  maxlength="2000"
                   class="form-control"
                   placeholder="Your Message Here"
                   :class="{
@@ -106,7 +106,7 @@
                     >Message length should be atleast 10
                   </span>
                   <span v-if="!$v.user.message.maxLength"
-                    >Message length should not be greater than 255
+                    >Message length should not be greater than 2000
                   </span>
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default {
       message: {
         required,
         minLength: minLength(10),
-        maxLength: maxLength(255),
+        maxLength: maxLength(2000),
       },
     },
   },

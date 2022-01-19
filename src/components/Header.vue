@@ -132,7 +132,9 @@
             </div>
             <div class="mainmenu pull-left">
               <ul class="nav navbar-nav collapse navbar-collapse">
-                <li><router-link to="/" class="active">Home</router-link></li>
+                <li>
+                  <router-link to="/" exact>Home</router-link>
+                </li>
                 <li class="dropdown">
                   <a href="#">Shop<i class="fa fa-angle-down"></i></a>
                   <ul role="menu" class="sub-menu">
@@ -148,7 +150,7 @@
                 </li>
 
                 <li>
-                  <router-link to="/contact">Contact Us </router-link>
+                  <router-link to="/contact" exact>Contact Us </router-link>
                 </li>
               </ul>
             </div>
@@ -183,4 +185,8 @@ export default {
 </script>
 
 <style>
+.router-link-active {
+  color: black;
+  background: blanchedalmond;
+}
 </style>
