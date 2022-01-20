@@ -212,11 +212,12 @@ export default {
             console.log(this.formData);
             alert(res.data.msg);
           } else {
-            alert("something went wrong");
+            alert("Something went wrong");
             console.log(res.data);
           }
         })
         .catch((err) => {
+          alert("Something went wrong" + err);
           console.log("Something Wrong " + err);
         });
     },

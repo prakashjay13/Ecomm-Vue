@@ -130,7 +130,7 @@ export default {
         quantity: parseInt(product.quantity) - 1,
       });
       if (product.quantity < 1) {
-        alert("You will miss it !! ");
+        this.$swal("You will miss it !!", "", "error");
         let cart = this.item.indexOf(product);
         this.item.splice(cart, 1);
       }

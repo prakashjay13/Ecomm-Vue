@@ -7,6 +7,7 @@ import Login from '../components/Login.vue';
 import Cart from '../components/Cart.vue';
 import Checkout from '../components/Checkout.vue';
 import Product from '../components/Product.vue';
+import Track from '../components/Track.vue';
 import Order from '../components/Order.vue';
 import Register from '../components/Register.vue';
 import Wishlist from '../components/Wishlist.vue';
@@ -59,6 +60,12 @@ export default new Router({
             path: '/cart',
             name: 'Cart',
             component: Cart
+        },
+        {
+            path: '/track',
+            name: 'Track',
+            beforeEnter: myGuard,
+            component: Track
         },
         {
             path: '/wishlist',

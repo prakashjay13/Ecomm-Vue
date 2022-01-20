@@ -107,7 +107,7 @@ export default {
         .then((res) => {
           if (res.data.err == 0) {
             saveToken(res.data.token);
-            alert(res.data.msg);
+            this.$swal(res.data.msg, "", "success");
             localStorage.setItem("uid", res.data.email);
             this.$router.push("/");
             store.dispatch({
@@ -117,8 +117,11 @@ export default {
             });
             console.log(this.formData);
             console.log(res.data);
-          } else {
-            alert("Invalid email or password");
+          }
+          if (
+            res.data.err == "email and password does not match to our records"
+          ) {
+            this.$swal("Invalid email or password", "", "error");
           }
         })
         .catch((err) => {

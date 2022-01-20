@@ -7,6 +7,7 @@
           <th>Quantity</th>
           <th>Price</th>
           <th>Total Amount</th>
+          <th>Tracking_Id</th>
           <th>Status</th>
         </tr>
       </thead>
@@ -16,7 +17,8 @@
           <td>{{ order.quantity }}</td>
           <td>{{ order.price }}</td>
           <td>{{ order.quantity * order.price }}</td>
-          <td><h4>Processing</h4></td>
+          <td>{{ order.tracking_id }}</td>
+          <td>{{ order.status }}</td>
         </tr>
       </tbody>
     </table>

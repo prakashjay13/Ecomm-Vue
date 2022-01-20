@@ -70,6 +70,12 @@
                 </li>
 
                 <li>
+                  <router-link to="/track">
+                    <i class="fa fa-search"></i> Track Order</router-link
+                  >
+                </li>
+
+                <li>
                   <router-link to="/checkout"
                     ><i class="fa fa-crosshairs"></i> Checkout</router-link
                   >

@@ -90,11 +90,12 @@ export default {
         };
         const found = arr.some((el) => el.pid == product.id);
         if (found) {
-          alert("This Product is already added");
+          this.$swal("Product already added", "", "error");
         } else {
           arr.push(obj);
           localStorage.setItem("myCart", JSON.stringify(arr));
           this.$store.dispatch("addToCart", arr);
+          this.$swal("Product added to cart", "", "success");
         }
       } else {
         let arr = [];
@@ -124,6 +125,7 @@ export default {
       arr.push(obj);
       console.log(product);
       localStorage.setItem("myWishlist", JSON.stringify(arr));
+      this.$swal("Product Added to Wishlist", "", "success");
     },
   },
   mounted() {
