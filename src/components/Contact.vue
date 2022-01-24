@@ -211,12 +211,13 @@ export default {
       console.log(formData);
       ContactUs(formData)
         .then((res) => {
+          //promise
           if (res.data.err == 1) {
             this.$router.push("/");
             console.log(this.formData);
-            alert(res.data.msg);
+            this.$swal(res.data.msg, "", "success");
           } else {
-            alert("something went wrong");
+            this.$swal("something went wrong", "", "error");
             console.log(res.data);
           }
         })

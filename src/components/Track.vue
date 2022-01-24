@@ -1,7 +1,7 @@
 <template>
   <div class="container">
       <h2><b>Track your order :</b></h2>
-      <input type="text" v-model="index">
+      <input type="text" placeholder="Enter the order id" v-model="index">
       <div>
           <br>
           <div>

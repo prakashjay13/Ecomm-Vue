@@ -210,9 +210,9 @@ export default {
           if (res.data.err == 0) {
             this.$router.push("/login");
             console.log(this.formData);
-            alert(res.data.msg);
+            this.$swal(res.data.msg, "", "success");
           } else {
-            alert("Something went wrong");
+            this.$swal("Something went wrong", "", "error");
             console.log(res.data);
           }
         })
