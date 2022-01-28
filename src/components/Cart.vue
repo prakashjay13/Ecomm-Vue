@@ -69,33 +69,12 @@
 
     <section id="do_action">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="chose_area">
-              <ul class="user_option">
-                <li>
-                  <input type="checkbox" />
-                  <label>Use Coupon Code</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div>
-              <ul>
-                <li>
-                  <h2>
-                    <b>Total: ₹ {{ check() }}</b>
-                  </h2>
-                </li>
-              </ul>
-
-              <router-link class="btn btn-default check_out" to="/checkout"
-                >Check Out</router-link
-              >
-            </div>
-          </div>
-        </div>
+        <h2>
+          <b>Total: ₹ {{ check() }}</b>
+        </h2>
+        <router-link class="btn btn-default check_out" to="/checkout"
+          >Check Out</router-link
+        >
       </div>
     </section>
     <!--/#do_action-->
@@ -152,6 +131,7 @@ export default {
         sum = sum + product.price * product.quantity;
       });
       localStorage.setItem("total", JSON.stringify(sum));
+      this.total = sum;
       return sum;
     },
   },

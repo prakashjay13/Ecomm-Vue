@@ -9,7 +9,8 @@ export default new Vuex.Store({
     },
 
     getters: {
-        inCart: state => state.inCart
+        inCart: state => state.inCart,
+
     },
 
     mutations: {
@@ -24,7 +25,6 @@ export default new Vuex.Store({
                 window.localStorage.removeItem('token'),
                 window.localStorage.removeItem('uid'),
                 window.localStorage.removeItem('users'),
-                window.localStorage.removeItem('myCart'),
                 window.localStorage.removeItem('myWishlist'),
                 window.localStorage.removeItem('total')
 

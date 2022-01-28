@@ -211,10 +211,11 @@ export default {
             this.$router.push("/login");
             console.log(this.formData);
             this.$swal(res.data.msg, "", "success");
-          } else {
-            this.$swal("Something went wrong", "", "error");
-            console.log(res.data);
           }
+          //  else {
+          //   this.$swal("Something went wrong", "", "error");
+          //   console.log(res.data);
+          // }
         })
         .catch((err) => {
           alert("Something went wrong" + err);

@@ -22,6 +22,9 @@ export function checkout(data) {
     return axios.post(`${MAIN_URL}checkout`, data)
 }
 
+export function wishlist(data) {
+    return axios.post(`${MAIN_URL}wishlist`, data)
+}
 
 export function profile() {
     var token = localStorage.getItem('token');
@@ -37,10 +40,10 @@ export function cms() {
     return axios.get(`${MAIN_URL}cms`);
 }
 
-export function coupon() {
-    return axios.get(`${MAIN_URL}getcoupons`);
+export function coupon(data) {
+    return axios.get(`${MAIN_URL}getcoupons`, data);
 }
 
 
 
-export default { userLogin, userRegister, ContactUs, banner, product, profile, checkout, changepassword, cms, coupon };
+export default { userLogin, userRegister, ContactUs, banner, product, profile, checkout, changepassword, cms, coupon, wishlist };

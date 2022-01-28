@@ -25,7 +25,6 @@
               <td class="price">Price</td>
               <td class="quantity">Quantity</td>
               <td class="total">Total</td>
-              <td class="remove">Remove</td>
             </tr>
           </thead>
           <tbody>
@@ -49,11 +48,7 @@
               </td>
               <td class="cart_quantity">
                 <div class="cart_quantity_button">
-                  <button @click="addQty(product)">+</button>
-
                   <b> {{ product.quantity }} </b>
-
-                  <button @click="subQty(product)">-</button>
                 </div>
               </td>
               <td class="cart_total">
@@ -61,10 +56,42 @@
                   {{ product.price * product.quantity }}
                 </p>
               </td>
-              <td>
-                <button @click="delItem(product)" class="btn btn-danger">
-                  ❌
-                </button>
+            </tr>
+            <br />
+            <tr>
+              <td colspan="3">
+                <div>
+                  <h4>
+                    »» Apply these Coupons and get discount on your purchase!!
+                  </h4>
+                </div>
+                <div v-for="cou in coupons" :key="cou.id">
+                  {{ cou.code }}
+                </div>
+                <form @submit.prevent="applyCoupon">
+                  <label for="" style="display: block">Apply coupon</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    style="width: 25%; display: inline"
+                    v-model="couponCode"
+                  />
+                  <button
+                    v-if="couponState == false"
+                    class="btn checkoutBtn"
+                    type="submit"
+                  >
+                    APPLY
+                  </button>
+                  <button
+                    v-else
+                    class="btn"
+                    style="margin-left: 10px"
+                    type="button"
+                  >
+                    APPLIED
+                  </button>
+                </form>
               </td>
             </tr>
           </tbody>
@@ -74,7 +101,7 @@
             <ul>
               <li>
                 <h2>
-                  <b>Total: ₹ {{ subtotal }}</b>
+                  <b>Final Amount: ₹ {{ subtotal }}</b>
                 </h2>
               </li>
             </ul>
@@ -91,7 +118,7 @@
             <div class="bill-to">
               <p>Ship To</p>
               <div class="form-one">
-                <form @submit="postcheckout()">
+                <form @submit.prevent="postcheckout">
                   <div class="form-group">
                     <input
                       type="email"
@@ -277,6 +304,7 @@
 <script>
 import { checkout } from "@/common/Service";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import axios from "axios";
 export default {
   name: "Checkout",
   data() {
@@ -294,6 +322,11 @@ export default {
         bmobile: "",
       },
       submitted: false,
+      camount: undefined,
+      couponDiscount: 0,
+      couponState: false,
+      coupons: "",
+      couponCode: "",
 
       subtotal: localStorage.getItem("total"),
     };
@@ -312,6 +345,11 @@ export default {
   },
   mounted() {
     this.item = JSON.parse(localStorage.getItem("myCart"));
+
+    axios.get("http://127.0.0.1:8000/api/coupon").then((res) => {
+      console.log(res.data);
+      this.coupons = res.data.coupon;
+    });
   },
   methods: {
     postcheckout() {
@@ -325,10 +363,11 @@ export default {
         bemail: this.user.bemail,
         baddress: this.user.baddress,
         bmobile: this.user.bmobile,
+        camount: this.subtotal,
         id: localStorage.getItem("uid"),
         cart: JSON.parse(localStorage.getItem("myCart")),
       };
-
+      console.log(formData);
       // stop here if form is invalid
       this.$v.$touch();
       if (this.$v.$invalid) {
@@ -341,6 +380,7 @@ export default {
             console.log(res.data.checkout);
             alert(res.data.msg);
             this.$router.push({ path: "/" });
+            window.localStorage.removeItem("myCart");
           } else {
             alert("something went wrong");
             console.log(res.data);
@@ -351,32 +391,17 @@ export default {
         });
     },
 
-    addQty(product) {
-      Object.assign(product, {
-        quantity: parseInt(product.quantity) + 1,
+    applyCoupon() {
+      this.coupons.forEach((coupon) => {
+        if (coupon.code == this.couponCode) {
+          this.coupon_id = coupon.id;
+          this.couponDiscount = coupon.value;
+          this.subtotal -= this.couponDiscount;
+          return;
+        }
       });
-      this.total += product.quantity * product.price;
-      localStorage.setItem("myCart", JSON.stringify(this.item));
-    },
-
-    subQty(product) {
-      Object.assign(product, {
-        quantity: parseInt(product.quantity) - 1,
-      });
-      if (product.quantity < 1) {
-        alert("You will miss it !! ");
-        let cart = this.item.indexOf(product);
-        this.item.splice(cart, 1);
-      }
-      this.total -= product.quantity * product.price;
-      localStorage.setItem("myCart", JSON.stringify(this.item));
-    },
-
-    delItem(product) {
-      let cart = this.item.indexOf(product);
-      console.log(cart);
-      this.item.splice(cart, 1);
-      localStorage.setItem("myCart", JSON.stringify(this.item));
+      this.couponState = true;
+      alert("Coupon has been applied.");
     },
   },
 };

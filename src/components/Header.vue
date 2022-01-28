@@ -65,7 +65,8 @@
 
                 <li>
                   <router-link to="/cms">
-                    <i class="fa fa-check-circle"></i> About Us</router-link
+                    <i class="fa fa-check-circle exact"></i> About
+                    Us</router-link
                   >
                 </li>
 

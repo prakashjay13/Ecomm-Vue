@@ -33,6 +33,26 @@ function myGuard(to, from, next) {
     }
 }
 
+
+// function myGuard2(to, from, next) {
+//     let isAdded = false;
+//     if (localStorage.getItem('myCart') != undefined) {
+//         isAdded = true;
+//     }
+//     else {
+//         isAdded = false;
+//     }
+//     if (isAdded) {
+//         next();
+//     }
+//     else {
+//         alert('Add Products to cart first');
+//         next('/product/:id?');
+//     }
+// }
+
+
+
 export default new Router({
     routes: [
         {
@@ -54,7 +74,9 @@ export default new Router({
         {
             path: '/cms',
             name: 'Cms',
-            component: Cms
+            component: Cms,
+            mode: "history",
+            linkExactActiveClass: "active",
         },
         {
             path: '/cart',
@@ -108,5 +130,9 @@ export default new Router({
             beforeEnter: myGuard,
             component: Changepassword
         },
-    ]
+    ],
+    mode: 'history'
+
+
 })
+
